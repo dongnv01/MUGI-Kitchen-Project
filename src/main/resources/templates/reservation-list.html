@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách đặt bàn</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Danh sách đặt bàn</h1>
+  <div>
+    <button class="btn-primary"><a style="text-decoration: none; color: aliceblue" th:href="admin">Quản lý món ăn</a></button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Tên Khách</th>
+      <th>Email</th>
+      <th>Số điện thoại</th>
+      <th>Số người</th>
+      <th>Ngày Đặt</th>
+      <th>Thời gian</th>
+      <th>Lời nhắn</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+      <td th:text="${reservation.name}"></td>
+      <td th:text="${reservation.email}"></td>
+      <td th:text="${reservation.phone}"></td>
+      <td th:text="${reservation.people}"></td>
+      <td th:text="${reservation.date}"></td>
+      <td th:text=" ${reservation.time +':00'}"></td>
+      <td th:text="${reservation.message}"></td>
+      <td>
+        <a th:href="@{'/delete-reservation/'+${reservation.getId()}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

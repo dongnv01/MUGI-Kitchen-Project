@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Món Ăn</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Thêm Món Ăn</h2>
+  <form th:action="add" th:object="${food}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Tên Món Ăn:</label>
+      <input type="text" class="form-control" id="name" placeholder="Món ăn" name="foodName" th:value="${food.foodName}">
+    </div>
+    <div class="form-group">
+      <label>Giá:</label>
+      <input type="text" class="form-control" id="price" placeholder="Giá món ăn" name="price" th:value="${food.price}">
+    </div>
+    <div class="form-group">
+      <label>Image:</label>
+      <input type="file" class="form-control" id="file" placeholder="Thêm ảnh" name="file" th:value="${food.file}">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>

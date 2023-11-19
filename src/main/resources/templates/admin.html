@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Admin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Quản lý món ăn</h1>
+    <div style="text-align: center">
+        <p>Quản trị viên: <span th:text="${username}"></span>!</p>
+    </div>
+    <div class="search-container" style="margin-bottom: 10px">
+        <form th:action="@{/search}" method="post" >
+            <input type="text" placeholder="Tìm kiếm.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div th:if="${param.messagesuccess} !=null">
+        <script>
+            alert("Thêm mới thành công")
+        </script>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <button class="btn-success"><a style="text-decoration: none; color: aliceblue" th:href="add">Thêm Món Ăn</a></button>
+        <button class="btn-primary"><a style="text-decoration: none; color: aliceblue" th:href="reservation-list">Danh sách đặt bàn</a></button>
+        <button class="btn-danger"><a style="text-decoration: none; color: aliceblue" th:href="@{/logout}">Đăng Xuất</a></button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Tên Món Ăn</th>
+            <th>Image</th>
+            <th>Giá</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="food :${list_food}">
+            <td th:text="${food.getFoodName()}"></td>
+            <td> <img th:src="${food.getImage()}" alt="food image" width="150px" height="150px"></td>
+            <td th:text="${food.getPrice()}"></td>
+            <td>
+                <a th:href="@{'/edit/'+${food.getId()}}">Edit</a>
+                <a th:href="@{'/delete/'+${food.getId()}}" >Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pagination" th:each="i: ${#numbers.sequence(1, totalPages)}">
+        <li><a style="border-radius: 4px" th:if="${i != curentPage}" th:href="@{'/admin?page=' + ${i}}">[[${i}]]</a></li>
+        <li class="active"><span style="border-radius: 4px" th:unless="${i != curentPage}">[[${i}]]</span></li>
+    </ul>
+
+</div>
+</body>
+</html>
