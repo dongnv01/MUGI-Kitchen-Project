@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,8 +24,13 @@ public class Food {
     private String image;
     private Integer price;
 
+    private Double rating;
+
     public Food toEntity(FoodDto dto){
-        return Food.builder().id(dto.getId()).foodName(dto.getFoodName()).price(dto.getPrice()).image(dto.getImage())
+        return Food.builder().id(dto.getId()).foodName(dto.getFoodName()).price(dto.getPrice()).image(dto.getImage()).rating(dto.getRating())
                 .build();
     }
+
+    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
 }

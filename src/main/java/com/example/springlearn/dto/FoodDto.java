@@ -16,4 +16,5 @@ public class FoodDto {
     private Integer price;
     private MultipartFile file;
     private String image;
+    private Double rating;
 }

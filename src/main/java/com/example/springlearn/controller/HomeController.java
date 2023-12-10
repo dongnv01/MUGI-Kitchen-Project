@@ -71,4 +71,16 @@ public class HomeController {
         return ResponseEntity.ok(foodList);
     }
 
+    @PostMapping("/{foodId}/rate")
+    public ResponseEntity<String> rateFood(@PathVariable Long foodId, @RequestParam Double rating) {
+        // Gọi service để lưu rating vào database
+        foodService.rateFood(foodId, rating);
+        return ResponseEntity.ok("Rating successful");
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("user", new UserDto());
+        return "login";
+    }
 }

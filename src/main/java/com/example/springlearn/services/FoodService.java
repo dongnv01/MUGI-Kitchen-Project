@@ -15,4 +15,6 @@ public interface FoodService {
     boolean delete(long id);
     FoodDto findById(long id);
     List<Food>findByName(String name);
+
+    void rateFood(Long foodId, Double rating);
 }

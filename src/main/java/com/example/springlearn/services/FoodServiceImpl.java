@@ -85,4 +85,15 @@ public class FoodServiceImpl implements FoodService{
 
         return foodRepository.findByFoodNameContaining(name);
     }
+
+    public void rateFood(Long foodId, Double rating) {
+        Optional<Food> optionalFood = foodRepository.findById(foodId);
+        if (optionalFood.isPresent()) {
+            Food food = optionalFood.get();
+            food.setRating(rating);
+
+
+            foodRepository.save(food);
+        }
+    }
 }
